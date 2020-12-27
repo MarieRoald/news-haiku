@@ -10,12 +10,12 @@ __author__ = "Marie Roald & Yngve Mardal Moe"
 app = flask.Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-with open("static/haikus.json") as f:
-    haikus = json.load(f)
-
 
 @app.route("/")
 def haiku():
+    with open("static/haikus.json") as f:
+        haikus = json.load(f)
+
     haiku_info = random.choice(haikus)
     haiku = haiku_info["haiku"].splitlines()
 
