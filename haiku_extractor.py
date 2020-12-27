@@ -143,7 +143,7 @@ def get_haiku_season_score(
 if __name__ == "__main__":
     rss = feedparser.parse("https://www.nrk.no/toppsaker.rss")
 
-    nlp = spacy.load("nb_core_news_md")
+    nlp = spacy.load("nb_core_news_sm")
 
     merge_noun_chunks = nlp.create_pipe("merge_noun_chunks")
     nlp.add_pipe(merge_noun_chunks)
