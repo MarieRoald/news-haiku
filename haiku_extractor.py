@@ -2,7 +2,6 @@ import itertools
 import json
 import time
 from string import digits
-from subprocess import run
 from typing import List, Optional, Tuple
 
 import feedparser
@@ -144,11 +143,7 @@ def get_haiku_season_score(
 if __name__ == "__main__":
     rss = feedparser.parse("https://www.nrk.no/toppsaker.rss")
 
-    try:
-        nlp = spacy.load("nb_core_news_md")
-    except OSError:
-        run("python -m spacy download nb_core_news_md".split())
-        nlp = spacy.load("nb_core_news_md")
+    nlp = spacy.load("nb_core_news_md")
 
     merge_noun_chunks = nlp.create_pipe("merge_noun_chunks")
     nlp.add_pipe(merge_noun_chunks)

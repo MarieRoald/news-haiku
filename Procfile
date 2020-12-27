@@ -1,2 +1,2 @@
 web: gunicorn app:app
-worker: python haiku_extractor.py
+worker: bash haiku_extractor.sh
