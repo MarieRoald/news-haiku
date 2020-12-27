@@ -1,0 +1,45 @@
+html{
+    margin: 0;
+    height: 100%;
+}
+body{
+    text-align: center;
+    background-color: #2580B3   ;
+    background-image: linear-gradient(-225deg, #a8aec7ee 0%, #2580B3ee 100%), url(noise.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    display: block;
+    margin: 0;
+}
+a.haiku {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: gloss-drop, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    /*font-size: 72pt;*/
+    text-decoration: none;
+    text-align: left;
+    margin-top:5%;
+    /*width: 90%;*/
+    display: inline-block;
+}
+
+div#footer {
+    font-family: sans-serif;
+    color: black;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+div#footer a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8em;
+    padding-bottom:10px;
+}
+
+body a.haiku{ font-size:calc(25px + 5vw); }
