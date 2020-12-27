@@ -1,0 +1,54 @@
+{
+    "winter_words": [
+    "vinter",
+    "snø",
+    "ski",
+    "julefeiring",
+    "jul",
+    "høytid",
+    "november",
+    "desember",
+    "januar",
+    "februar"
+    ],
+    "spring_words": [
+        "vår",
+        "blomster",
+        "løvetann",
+        "april",
+        "mars",
+        "mai",
+        "nasjonaldag",
+        "flagg",
+        "barnetog",
+        "påske"
+    ],
+    "summer_words": [
+        "sommer",
+        "sol",
+        "bade",
+        "ferie",
+        "havet",
+        "øy",
+        "juni",
+        "juli",
+        "august",
+        "strand",
+        "syden",
+        "agurk"
+    ],
+    "fall_words": [
+        "høst",
+        "storm",
+        "halloween",
+        "mørkt",
+        "hytte",
+        "løv",
+        "trær",
+        "vind",
+        "september",
+        "oktober",
+        "regn"
+    ],
+    "season_words": ["årstid", "måned", "tid", "vær"]
+}
