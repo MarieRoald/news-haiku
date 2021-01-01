@@ -2,3 +2,5 @@ spacy
 flask
 feedparser
 gunicorn
+requests
+beautifulsoup4
