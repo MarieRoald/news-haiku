@@ -8,6 +8,9 @@ import feedparser
 import spacy
 from tqdm import tqdm
 
+import requests 
+from bs4 import BeautifulSoup 
+
 
 __author__ = "Marie Roald & Yngve Mardal Moe"
 
@@ -154,30 +157,39 @@ if __name__ == "__main__":
     while True:
         haikus = []
         for entry in tqdm(rss.entries):
-            doc = nlp(entry.description)
+            URL = entry.link
 
-            word_indices, syllabus_count = get_filtered_index_lists(doc)
+            r = requests.get(URL) 
+            soup = BeautifulSoup(r.content, 'html5lib') 
+            article = soup.find('div', attrs = {'class':'article-body'})
+            
+            if article is None:
+                paragraph_iterator = [entry.description]
+            else:
+                paragraph_iterator = (p.get_text() for p in article.findAll('p'))
+            for paragraph in paragraph_iterator: 
+                doc = nlp(paragraph)
 
-            haiku_list = []
+                word_indices, syllabus_count = get_filtered_index_lists(doc)
+                haiku_list = []
+                for i in range(len(word_indices)):
+                    haiku_indeces = detect_haiku_beginning(
+                        word_indices[i:], syllabus_count[i:], doc
+                    )
+                    if haiku_indeces is not None:
+                        if check_approved_ending(haiku_indeces, doc):
+                            haiku_list.append(haiku_indeces)
 
-            for i in range(len(word_indices)):
-                haiku_indeces = detect_haiku_beginning(
-                    word_indices[i:], syllabus_count[i:], doc
-                )
-                if haiku_indeces is not None:
-                    if check_approved_ending(haiku_indeces, doc):
-                        haiku_list.append(haiku_indeces)
-
-            for haiku in haiku_list:
-                if ENFORCE_SEASONAL_THEME and get_haiku_season_score(haiku, doc) < 0.5:
-                    continue
-                current_haiku = get_haiku(haiku, doc)
-                haikus.append(
-                    {
-                        "haiku": current_haiku,
-                        "link": entry.link,
-                    }
-                )
+                for haiku in haiku_list:
+                    if ENFORCE_SEASONAL_THEME and get_haiku_season_score(haiku, doc) < 0.5:
+                        continue
+                    current_haiku = get_haiku(haiku, doc)
+                    haikus.append(
+                        {
+                            "haiku": current_haiku,
+                            "link": entry.link,
+                        }
+                    )
 
         with open("static/haikus.json", "w") as f:
             json.dump(haikus, f)
