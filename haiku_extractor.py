@@ -158,8 +158,12 @@ if __name__ == "__main__":
         haikus = []
         for entry in tqdm(rss.entries):
             URL = entry.link
+            print("Scraping:", url)
 
-            r = requests.get(URL) 
+            try:
+                r = requests.get(URL) 
+            except requests.exceptions.ChunkedEncodingError:
+                continue
             soup = BeautifulSoup(r.content, 'html5lib') 
             article = soup.find('div', attrs = {'class':'article-body'})
             
