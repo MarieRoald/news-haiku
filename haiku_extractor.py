@@ -158,7 +158,7 @@ if __name__ == "__main__":
         haikus = []
         for entry in tqdm(rss.entries):
             URL = entry.link
-            print("Scraping:", url)
+            print("Scraping:", URL)
 
             try:
                 r = requests.get(URL) 
